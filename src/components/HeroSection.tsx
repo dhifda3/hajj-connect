@@ -5,7 +5,7 @@ import meccaBackground from "@/assets/mecca-background.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative section-padding min-h-screen overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

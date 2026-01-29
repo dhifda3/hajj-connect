@@ -56,12 +56,7 @@ const TestimonialsSection = () => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="bg-primary-foreground/10 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 flex flex-col h-full"
             >
-              {testimonial.featured && (
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4 w-fit">
-                  <i className="fas fa-crown" />
-                  Featured
-                </div>
-              )}
+
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">

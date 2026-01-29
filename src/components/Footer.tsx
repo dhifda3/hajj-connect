@@ -131,42 +131,12 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Contact Info Bar */}
-        <div className="py-8 border-b border-background/10">
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <a href={`mailto:${footerContent.contact.email}`} className="flex items-center gap-2 text-background/60 hover:text-background transition-colors">
-              <i className="fas fa-envelope" />
-              {footerContent.contact.email}
-            </a>
-            <a href={`tel:${footerContent.contact.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 text-background/60 hover:text-background transition-colors">
-              <i className="fas fa-phone" />
-              {footerContent.contact.phone}
-            </a>
-            <div className="flex items-center gap-2 text-background/60">
-              <i className="fas fa-map-marker-alt" />
-              {footerContent.contact.address}
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-background/40">
             © {new Date().getFullYear()} {footerContent.brand.name}. All rights reserved.
           </p>
 
-          {/* Legal Links */}
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            {footerContent.legal.map((link, i) => (
-              <a
-                key={i}
-                href={link.href}
-                className="text-background/40 hover:text-background transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
 
           {/* Payment Methods */}
           <div className="flex items-center gap-2">

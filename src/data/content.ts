@@ -357,10 +357,9 @@ export const footerContent = {
     address: "123 Business District, Lagos, Nigeria"
   },
   social: [
-    { icon: "fa-linkedin", href: "#", label: "LinkedIn" },
-    { icon: "fa-x-twitter", href: "#", label: "X" },
-    { icon: "fa-facebook", href: "#", label: "Facebook" },
-    { icon: "fa-whatsapp", href: "#", label: "WhatsApp" }
+    { icon: "fa-linkedin", href: "https://www.linkedin.com/company/it-solutions-ksa/about/", label: "LinkedIn" },
+    { icon: "fa-facebook", href: "https://www.facebook.com/profile.php?id=61586833453589", label: "Facebook" },
+    { icon: "fa-whatsapp", href: "https://wa.me/966565809269", label: "WhatsApp" }
   ],
   legal: [
     { label: "Privacy Policy", href: "#" },

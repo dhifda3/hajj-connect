@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+
 
 interface FormData {
   agencyName: string;
@@ -51,41 +53,69 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validation
-    if (!formData.agencyName || !formData.contactPerson || !formData.email || !formData.phone || !formData.country || !formData.agreement) {
+  
+    if (
+      !formData.agencyName ||
+      !formData.contactPerson ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.agreement
+    ) {
       toast({
         title: "Please fill in all required fields",
         description: "Make sure to complete all required fields and accept the terms.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
-
-    // Email validation
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
         title: "Invalid email address",
         description: "Please enter a valid email address.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
-
+  
     setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
+  
+    try {
+      await emailjs.send(
+        "service_9tsfqda",
+        "template_z32ir0v",
+        {
+          agency_name: formData.agencyName,
+          contact_person: formData.contactPerson,
+          email: formData.email,
+          phone: formData.phone,
+          country: formData.country,
+          agency_size: formData.agencySize,
+          services: formData.services.join(", "),
+          message: formData.message,
+        },
+        "3JoEdq7oWNDikmV7E"
+      );
+  
+      setIsSubmitted(true);
+      toast({
+        title: "Inquiry submitted!",
+        description: "Our team will contact you shortly.",
+      });
+  
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Could not send email. Please try again later.",
+        variant: "destructive",
+      });
+    }
+  
     setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Inquiry submitted successfully!",
-      description: "Our team will reach out to you within 24 hours.",
-    });
   };
+  
 
   const resetForm = () => {
     setFormData({
@@ -171,7 +201,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Free Consultation</h4>
-                  <p className="text-sm text-muted-foreground">60-min strategy session included</p>
+                  <p className="text-sm text-muted-foreground">30-min strategy session included</p>
                 </div>
               </div>
 
@@ -192,15 +222,15 @@ const ContactSection = () => {
               <div className="space-y-3">
                 <a href="tel:+2348001234567" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                   <i className="fas fa-phone" />
-                  <span>+234 800 123 4567</span>
+                  <span>+966 565809269</span>
                 </a>
-                <a href="https://wa.me/2348001234567" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <a href="https://wa.me/966565809269" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                   <i className="fab fa-whatsapp" />
                   <span>WhatsApp Chat</span>
                 </a>
-                <a href="mailto:hello@hajjconnect.com" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <a href="mailto:tempemail.a50@gmail.com" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                   <i className="fas fa-envelope" />
-                  <span>hello@hajjconnect.com</span>
+                  <span>itsolutions@gmail.com</span>
                 </a>
               </div>
             </div>
@@ -333,19 +363,6 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
                 />
-              </div>
-
-              <div className="mb-6">
-                <label className="flex items-start gap-2 cursor-pointer">
-                  <Checkbox
-                    checked={formData.agreement}
-                    onCheckedChange={(v) => handleInputChange("agreement", !!v)}
-                    className="mt-1"
-                  />
-                  <span className="text-sm text-muted-foreground">
-                    I agree to the privacy policy and consent to being contacted about HajjConnect services. *
-                  </span>
-                </label>
               </div>
 
               <Button 
